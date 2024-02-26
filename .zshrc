@@ -15,14 +15,9 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 ZSH_THEME="powerlevel10k/powerlevel10k"
-DEFAULT_USER=rjames
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# DEFAULT_USER=rjames
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -55,7 +50,7 @@ DEFAULT_USER=rjames
 # You can also set it to another string to have that shown instead of the default red dots.
 # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -134,34 +129,6 @@ function gp() {
 alias fuckit="rm -rf ./node_modules && yarn"
 alias cleanitup="npm prune && npm i && npm start"
 
-# Pinterest
-alias devapp="gironde ssh devrestricted"
-alias venv="source ~/code/pinboard/.venv/bin/activate"
-alias update="git sync && yarn"
-alias watch="yarn jest --watch"
-
-export GIT_SSH_COMMAND='gironde ssh'
-
-function cyp() {
-  read "platform?Enter platform (www, mobile, sterling, etc): ";
-  read "testUrl?Enter base URL for testing: ";
-  yarn run test:cypress:$platform --config baseUrl=$testUrl
-}
-
-function cypmweb() {
-  yarn run test:cypress:mobile --config baseUrl=https://www-dev-rjames.pinterdev.com
-}
-
-function land() {
-  git checkout $1 && arc land
-}
-
-swaptogithub(){
-    local repo_name=$(basename $(git rev-parse --show-toplevel))
-    git remote set-url origin org-86262824@github.com:pinternal/${repo_name//_/-}.git
-    git fetch origin
-}
-
 # Misc
 alias aliass="code ~/.zshrc"
 alias findfile="find . -name"
@@ -188,15 +155,12 @@ bigger() {
     python /usr/local/bin/big.py "$*" | pbcopy
 }
 
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
+ export NVM_DIR="$HOME/.nvm"
+  . "$(brew --prefix nvm)/nvm.sh"
 
 export PATH=$PATH:$HOME/bin
 # export EDITOR='code'
 
-export PATH=$PATH:"$HOME/code/arcanist/arcanist/bin"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -205,7 +169,7 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
+# source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 
 # This seems to cause a bug? https://github.com/romkatv/powerlevel10k/issues/1628
 # source /Users/rjames/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
