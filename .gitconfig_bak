@@ -1,0 +1,31 @@
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[user]
+	name = Ryan James
+	email = 
+[github]
+	user = dangerismycat
+[credential]
+	helper = osxkeychain
+[push]
+	default = simple
+	followTags = true
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	visual = !gitk
+	sync = !git fetch origin && git rebase origin/master
+	upsync = !git fetch upstream && git rebase upstream/master
+	mine = log --author='Ryan James' --oneline --pretty=format:'%Cred%h%Cgreen%x09%an%Creset%x09%ad%C(yellow)%x09%s' --date=short
+	alias = config --get-regexp ^alias\\.
+[pager]
+	branch = false
+[core]
+	editor = vi
